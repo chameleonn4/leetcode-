@@ -44,7 +44,9 @@ git commit -m "add 2. Add Two Numbers"
 git push
 ```
 
-`git commit -m` 后面的说明按当前这道题填写即可。`git push` 第一次可能需要在弹出的窗口里登录 GitHub，登录一次之后就会记住。
+`git commit -m` 后面的说明按当前这道题填写即可。
+
+> 提示：本机直连 GitHub 会被重置，git 已配置为通过本机代理 `127.0.0.1:7890`（Clash）访问 github.com，所以推送时保持 Clash 开着即可。GitHub 的登录凭证已保存在 Windows 凭据管理器（`git:https://github.com`）里，正常情况下不会再要求登录。
 
 ## 本地运行某一题
 
