@@ -5,7 +5,7 @@
 记录我的 LeetCode 刷题过程。每道题的代码放在 `solutions/` 目录下，题号与文件一一对应，并按题目记录在下面的索引表里。
 
 - **仓库地址**：<https://github.com/chameleonn4/leetcode->
-- **已刷题目**：4 题（简单 2、中等 2，持续更新中）
+- **已刷题目**：5 题（简单 3、中等 2，持续更新中）
 - **使用语言**：Python3
 
 ## 题目索引
@@ -16,6 +16,7 @@
 | 2 | [两数相加](https://leetcode.cn/problems/add-two-numbers/) | 中等 | Python3 | 哑结点 + 逐位相加 | [0002-add-two-numbers.py](solutions/0002-add-two-numbers.py) | 2026-10-08 |
 | 16 | [最接近的三数之和](https://leetcode.cn/problems/3sum-closest/) | 中等 | Python3 | 排序 + 双指针 | [0016-3sum-closest.py](solutions/0016-3sum-closest.py) | 2026-10-08 |
 | 26 | [删除有序数组中的重复项](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/) | 简单 | Python3 | 快慢指针 | [0026-remove-duplicates-from-sorted-array.py](solutions/0026-remove-duplicates-from-sorted-array.py) | 2026-10-08 |
+| 27 | [移除元素](https://leetcode.cn/problems/remove-element/) | 简单 | Python3 | 快慢指针 | [0027-remove-element.py](solutions/0027-remove-element.py) | 2026-10-08 |
 
 ## 目录结构
 
@@ -27,7 +28,8 @@ leetcode-/
     ├── 0001-two-sum.py
     ├── 0002-add-two-numbers.py
     ├── 0016-3sum-closest.py
-    └── 0026-remove-duplicates-from-sorted-array.py
+    ├── 0026-remove-duplicates-from-sorted-array.py
+    └── 0027-remove-element.py
 ```
 
 ## 文件命名规范
