@@ -5,7 +5,7 @@
 记录我的 LeetCode 刷题过程。每道题的代码放在 `solutions/` 目录下，题号与文件一一对应，并按题目记录在下面的索引表里。
 
 - **仓库地址**：<https://github.com/chameleonn4/leetcode->
-- **已刷题目**：5 题（简单 3、中等 2，持续更新中）
+- **已刷题目**：7 题（简单 4、中等 3，持续更新中）
 - **使用语言**：Python3
 
 ## 题目索引
@@ -17,6 +17,8 @@
 | 16 | [最接近的三数之和](https://leetcode.cn/problems/3sum-closest/) | 中等 | Python3 | 排序 + 双指针 | [0016-3sum-closest.py](solutions/0016-3sum-closest.py) | 2026-10-08 |
 | 26 | [删除有序数组中的重复项](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/) | 简单 | Python3 | 快慢指针 | [0026-remove-duplicates-from-sorted-array.py](solutions/0026-remove-duplicates-from-sorted-array.py) | 2026-10-08 |
 | 27 | [移除元素](https://leetcode.cn/problems/remove-element/) | 简单 | Python3 | 快慢指针 | [0027-remove-element.py](solutions/0027-remove-element.py) | 2026-10-08 |
+| 28 | [找出字符串中第一个匹配项的下标](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/) | 简单 | Python3 | 朴素匹配（双指针） | [0028-find-the-index-of-the-first-occurrence-in-a-string.py](solutions/0028-find-the-index-of-the-first-occurrence-in-a-string.py) | 2026-10-10 |
+| 48 | [旋转图像](https://leetcode.cn/problems/rotate-image/) | 中等 | Python3 | 转置 + 翻转每行 | [0048-rotate-image.py](solutions/0048-rotate-image.py) | 2026-10-10 |
 
 ## 目录结构
 
@@ -29,7 +31,9 @@ leetcode-/
     ├── 0002-add-two-numbers.py
     ├── 0016-3sum-closest.py
     ├── 0026-remove-duplicates-from-sorted-array.py
-    └── 0027-remove-element.py
+    ├── 0027-remove-element.py
+    ├── 0028-find-the-index-of-the-first-occurrence-in-a-string.py
+    └── 0048-rotate-image.py
 ```
 
 ## 文件命名规范
@@ -54,7 +58,7 @@ git push
 
 `git commit -m` 后面的说明按当前这道题填写即可。
 
-> 提示：本机直连 GitHub 会被重置，git 已配置为通过本机代理 `127.0.0.1:7890`（Clash）访问 github.com，所以推送时保持 Clash 开着即可。GitHub 的登录凭证已保存在 Windows 凭据管理器（`git:https://github.com`）里，正常情况下不会再要求登录。
+> 提示：如果 `git push` 报 `Failed to connect to github.com port 443`，一般是本机直连 GitHub 被重置。打开 Clash 后执行 `git config --global http.https://github.com.proxy http://127.0.0.1:7890` 再 push；不需要代理时用 `git config --global --unset http.https://github.com.proxy` 恢复直连。GitHub 的登录凭证已保存在 Windows 凭据管理器（`git:https://github.com`）里，正常情况下不会再要求登录。
 
 ## 本地运行某一题
 
