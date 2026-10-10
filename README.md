@@ -5,7 +5,7 @@
 记录我的 LeetCode 刷题过程。每道题的代码放在 `solutions/` 目录下，题号与文件一一对应，并按题目记录在下面的索引表里。
 
 - **仓库地址**：<https://github.com/chameleonn4/leetcode->
-- **已刷题目**：7 题（简单 4、中等 3，持续更新中）
+- **已刷题目**：8 题（简单 4、中等 4，持续更新中）
 - **使用语言**：Python3
 
 ## 题目索引
@@ -19,13 +19,38 @@
 | 27 | [移除元素](https://leetcode.cn/problems/remove-element/) | 简单 | Python3 | 快慢指针 | [0027-remove-element.py](solutions/0027-remove-element.py) | 2026-10-08 |
 | 28 | [找出字符串中第一个匹配项的下标](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/) | 简单 | Python3 | 朴素匹配（双指针） | [0028-find-the-index-of-the-first-occurrence-in-a-string.py](solutions/0028-find-the-index-of-the-first-occurrence-in-a-string.py) | 2026-10-10 |
 | 48 | [旋转图像](https://leetcode.cn/problems/rotate-image/) | 中等 | Python3 | 转置 + 翻转每行 | [0048-rotate-image.py](solutions/0048-rotate-image.py) | 2026-10-10 |
+| 912 | [排序数组](https://leetcode.cn/problems/sort-array/) | 中等 | Python3 | 随机基准 + 三路快排（[图解](notes/0912-三路快排分区图解.png)、[笔记](#912-排序数组--三路快排的分区过程)） | [0912-sort-array.py](solutions/0912-sort-array.py) | 2026-10-10 |
+
+## 题解笔记
+
+### 912. 排序数组 —— 三路快排的分区过程
+
+![三路快排 partition 图解](notes/0912-三路快排分区图解.png)
+
+一次分区把数组切成四段，`lt` / `i` / `gt` 三个指针分别卡在边界上：
+
+| 指针 | 含义 |
+| --- | --- |
+| `lt` | 等于段的左边界：`[low, lt-1]` 全部 `< ref` |
+| `i` | 当前扫描位置：`[lt, i-1]` 全部 `== ref` |
+| `gt` | 大于段的左边界 - 1：`[i, gt]` 还没处理，`[gt+1, high]` 全部 `> ref` |
+
+循环里三条分支的关键区别：
+
+- `nums[i] < ref`：和 `nums[lt]` 交换，`lt++` 且 **`i++`** —— 从等于段换过来的元素一定是 `ref`，已经就位，不用再看；
+- `nums[i] > ref`：和 `nums[gt]` 交换，`gt--`，**`i` 不动** —— 从待处理区换过来的是没见过的元素，下一轮必须重新判断；
+- `nums[i] == ref`：`i++` —— 元素本来就该待在中间。
+
+循环结束时 `[lt, gt]` 正好圈住整个等于段，所以只需要递归 `[low, lt-1]` 和 `[gt+1, high]`。等于段的元素一次分区就全部归位，这正是重复元素极多时三路快排不会退化成 O(n²) 的原因。
 
 ## 目录结构
 
 ```
 leetcode-/
-├── README.md                  # 本文件：题目索引 + 上传流程
+├── README.md                  # 本文件：题目索引 + 题解笔记 + 上传流程
 ├── .gitignore                 # 忽略 __pycache__ 等无关文件
+├── notes/                     # 题解笔记、手画/生成的图解
+│   └── 0912-三路快排分区图解.png
 └── solutions/                 # 所有题解代码
     ├── 0001-two-sum.py
     ├── 0002-add-two-numbers.py
@@ -33,7 +58,8 @@ leetcode-/
     ├── 0026-remove-duplicates-from-sorted-array.py
     ├── 0027-remove-element.py
     ├── 0028-find-the-index-of-the-first-occurrence-in-a-string.py
-    └── 0048-rotate-image.py
+    ├── 0048-rotate-image.py
+    └── 0912-sort-array.py
 ```
 
 ## 文件命名规范
@@ -42,6 +68,8 @@ leetcode-/
 
 - 题号补零到 4 位（例如第 1 题写 `0001`），这样按文件名排序就是按题号排序；
 - 题目英文名全小写、单词之间用 `-` 连接，例如 `0001-two-sum.py`、`0002-add-two-numbers.py`。
+
+图解、笔记等非代码文件放在 `notes/` 下，命名 `题号-说明.png`，并在 README 的「题解笔记」里内嵌引用。
 
 ## 每做完一题，如何上传（三步）
 
