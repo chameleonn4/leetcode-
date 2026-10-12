@@ -7,8 +7,8 @@
 #       需要的份数 = (m + index - 1) // n + 1，也就是 b 从 index 起一直覆盖到第几份 a。
 # 复杂度：时间 O(n + m)，空间 O(m)
 # 图解：notes/0686-KMP回退原理图解.png、notes/0686-重复叠加字符串匹配图解.png
-# 备注：下面这段 generate_next 用 if 回退（标准写法是 while），本题的结果仍然正确
-#       （已穷举对拍验证），但算出的 next 数组在数学上不等于标准定义，换到别的 KMP 题里要小心。
+# 备注：generate_next 里的回退必须是 while（可能连续回退多次），这里曾经误写成 if，
+#       会算出不符合定义的 next 数组（本题侥幸正确，换到别的 KMP 题就会错），已修正。
 
 
 class Solution:
@@ -32,7 +32,7 @@ class Solution:
             next = [0] * len(p)
             left = 0
             for right in range(1, len(p)):
-                if left > 0 and p[left] != p[right]:
+                while left > 0 and p[left] != p[right]:   #必须用 while！回退一次后 p[left] 可能还对不上 p[right]，要连续回退；写成 if 算出的 next 不符合定义
                     left = next[left - 1]
                 if p[left] == p[right]:
                     left += 1
