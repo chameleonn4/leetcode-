@@ -5,7 +5,7 @@
 记录我的 LeetCode 刷题过程。每道题的代码放在 `solutions/` 目录下，题号与文件一一对应，并按题目记录在下面的索引表里。
 
 - **仓库地址**：<https://github.com/chameleonn4/leetcode->
-- **已刷题目**：10 题（简单 6、中等 4，持续更新中）
+- **已刷题目**：12 题（简单 6、中等 6，持续更新中）
 - **使用语言**：Python3
 
 ## 题目索引
@@ -21,6 +21,8 @@
 | 28 | [找出字符串中第一个匹配项的下标](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/) | 简单 | Python3 | 朴素匹配（双指针） | [0028-find-the-index-of-the-first-occurrence-in-a-string.py](solutions/0028-find-the-index-of-the-first-occurrence-in-a-string.py) | 2026-10-10 |
 | 48 | [旋转图像](https://leetcode.cn/problems/rotate-image/) | 中等 | Python3 | 转置 + 翻转每行 | [0048-rotate-image.py](solutions/0048-rotate-image.py) | 2026-10-10 |
 | 234 | [回文链表](https://leetcode.cn/problems/palindrome-linked-list/) | 简单 | Python3 | 转数组后首尾比较 | [0234-palindrome-linked-list.py](solutions/0234-palindrome-linked-list.py) | 2026-10-12 |
+| 622 | [设计循环队列](https://leetcode.cn/problems/design-circular-queue/) | 中等 | Python3 | 多开一格 + 取模区分空/满 | [0622-design-circular-queue.py](solutions/0622-design-circular-queue.py) | 2026-10-12 |
+| 686 | [重复叠加字符串匹配](https://leetcode.cn/problems/repeated-string-match/) | 中等 | Python3 | KMP 跑在 a 的无限重复串上（[图解](notes/0686-KMP回退原理图解.png)、[笔记](#686-重复叠加字符串匹配--kmp-在无限重复串上匹配)） | [0686-repeated-string-match.py](solutions/0686-repeated-string-match.py) | 2026-10-12 |
 | 912 | [排序数组](https://leetcode.cn/problems/sort-array/) | 中等 | Python3 | 随机基准 + 三路快排（[图解](notes/0912-三路快排分区图解.png)、[笔记](#912-排序数组--三路快排的分区过程)） | [0912-sort-array.py](solutions/0912-sort-array.py) | 2026-10-10 |
 
 ## 题解笔记
@@ -45,6 +47,23 @@
 
 循环结束时 `[lt, gt]` 正好圈住整个等于段，所以只需要递归 `[low, lt-1]` 和 `[gt+1, high]`。等于段的元素一次分区就全部归位，这正是重复元素极多时三路快排不会退化成 O(n²) 的原因。
 
+### 686. 重复叠加字符串匹配 —— KMP 在无限重复串上匹配
+
+![KMP 回退原理](notes/0686-KMP回退原理图解.png)
+
+![686 KMP 解法图解](notes/0686-重复叠加字符串匹配图解.png)
+
+把 `a` 无限重复看成一条磁带 a∞，题目就变成「`b` 最早出现在 a∞ 的哪个位置 `s`」，答案 `= (s + m - 1) // n + 1`。
+
+两个把"无限"变"有限"的结论：
+
+- **起点一定 `< n`**：a∞ 的周期是 `n`。若 `b` 能在 `s ≥ n` 处匹配，把整个匹配左移 `n` 格也成立，与「`s` 最早」矛盾，所以起点只可能在前 `n` 个位置里；
+- **只需要扫 `n + m - 1` 个字符**：起点最右是 `n-1`，`b` 长 `m`，终点最远 `(n-1) + (m-1) = n+m-2`。第 `i` 个字符直接取 `a[i % n]`，不用真的拼出无限长串。
+
+KMP 在这里的角色：`i` 扫磁带（只增不减），`j` = 已经匹配上 `b` 的前缀长度。失配时 `j = next[j-1]`，相当于把尺子 `b` 往右滑 `j - next[j-1]` 格，让「`b` 的前缀」重新对上「刚匹配过的后缀」，而不是把尺子退回起点。
+
+> ⚠️ 小提醒：`generate_next` 里的回退，标准写法是 `while`（可能连续回退多次）。用 `if` 只回退一次，算出来的 `next` 数组并不符合定义（例如 `"aaaba"` 得到 `[0,1,2,1,2]`，标准是 `[0,1,2,0,1]`）。本题因为每次失配后外层还有一层 `while` 兜着，结果仍然正确（已穷举对拍验证），但换到别的 KMP 题里要小心。
+
 ## 目录结构
 
 ```
@@ -52,6 +71,8 @@ leetcode-/
 ├── README.md                  # 本文件：题目索引 + 题解笔记 + 上传流程
 ├── .gitignore                 # 忽略 __pycache__ 等无关文件
 ├── notes/                     # 题解笔记、手画/生成的图解
+│   ├── 0686-KMP回退原理图解.png
+│   ├── 0686-重复叠加字符串匹配图解.png
 │   └── 0912-三路快排分区图解.png
 └── solutions/                 # 所有题解代码
     ├── 0001-two-sum.py
@@ -63,6 +84,8 @@ leetcode-/
     ├── 0028-find-the-index-of-the-first-occurrence-in-a-string.py
     ├── 0048-rotate-image.py
     ├── 0234-palindrome-linked-list.py
+    ├── 0622-design-circular-queue.py
+    ├── 0686-repeated-string-match.py
     └── 0912-sort-array.py
 ```
 
