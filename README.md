@@ -5,7 +5,7 @@
 记录我的 LeetCode 刷题过程。每道题的代码放在 `solutions/` 目录下，题号与文件一一对应，并按题目记录在下面的索引表里。
 
 - **仓库地址**：<https://github.com/chameleonn4/leetcode->
-- **已刷题目**：13 题（简单 7、中等 6，持续更新中）
+- **已刷题目**：16 题（简单 9、中等 7，持续更新中）
 - **使用语言**：Python3
 
 ## 题目索引
@@ -14,6 +14,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | [两数之和](https://leetcode.cn/problems/two-sum/) | 简单 | Python3 | 哈希表 | [0001-two-sum.py](solutions/0001-two-sum.py) | 2026-10-07 |
 | 2 | [两数相加](https://leetcode.cn/problems/add-two-numbers/) | 中等 | Python3 | 哑结点 + 逐位相加 | [0002-add-two-numbers.py](solutions/0002-add-two-numbers.py) | 2026-10-08 |
+| 3 | [无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/) | 中等 | Python3 | 滑动窗口 + 哈希表 | [0003-longest-substring-without-repeating-characters.py](solutions/0003-longest-substring-without-repeating-characters.py) | 2026-10-16 |
 | 16 | [最接近的三数之和](https://leetcode.cn/problems/3sum-closest/) | 中等 | Python3 | 排序 + 双指针 | [0016-3sum-closest.py](solutions/0016-3sum-closest.py) | 2026-10-08 |
 | 20 | [有效的括号](https://leetcode.cn/problems/valid-parentheses/) | 简单 | Python3 | 栈 | [0020-valid-parentheses.py](solutions/0020-valid-parentheses.py) | 2026-10-12 |
 | 26 | [删除有序数组中的重复项](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/) | 简单 | Python3 | 快慢指针 | [0026-remove-duplicates-from-sorted-array.py](solutions/0026-remove-duplicates-from-sorted-array.py) | 2026-10-08 |
@@ -22,9 +23,11 @@
 | 48 | [旋转图像](https://leetcode.cn/problems/rotate-image/) | 中等 | Python3 | 转置 + 翻转每行 | [0048-rotate-image.py](solutions/0048-rotate-image.py) | 2026-10-10 |
 | 88 | [合并两个有序数组](https://leetcode.cn/problems/merge-sorted-array/) | 简单 | Python3 | 双指针 + 临时数组 | [0088-merge-sorted-array.py](solutions/0088-merge-sorted-array.py) | 2026-10-12 |
 | 234 | [回文链表](https://leetcode.cn/problems/palindrome-linked-list/) | 简单 | Python3 | 转数组后首尾比较 | [0234-palindrome-linked-list.py](solutions/0234-palindrome-linked-list.py) | 2026-10-12 |
+| 349 | [两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/) | 简单 | Python3 | 排序 + 双指针（利用有序天然去重） | [0349-intersection-of-two-arrays.py](solutions/0349-intersection-of-two-arrays.py) | 2026-10-16 |
 | 622 | [设计循环队列](https://leetcode.cn/problems/design-circular-queue/) | 中等 | Python3 | 多开一格 + 取模区分空/满 | [0622-design-circular-queue.py](solutions/0622-design-circular-queue.py) | 2026-10-12 |
 | 686 | [重复叠加字符串匹配](https://leetcode.cn/problems/repeated-string-match/) | 中等 | Python3 | KMP 跑在 a 的无限重复串上（[图解](notes/0686-KMP回退原理图解.png)、[笔记](#686-重复叠加字符串匹配--kmp-在无限重复串上匹配)） | [0686-repeated-string-match.py](solutions/0686-repeated-string-match.py) | 2026-10-12 |
 | 912 | [排序数组](https://leetcode.cn/problems/sort-array/) | 中等 | Python3 | 随机基准 + 三路快排（[图解](notes/0912-三路快排分区图解.png)、[笔记](#912-排序数组--三路快排的分区过程)） | [0912-sort-array.py](solutions/0912-sort-array.py) | 2026-10-10 |
+| 1122 | [数组的相对排序](https://leetcode.cn/problems/relative-sort-array/) | 简单 | Python3 | 计数排序（下标即值，剩余自动升序） | [1122-relative-sort-array.py](solutions/1122-relative-sort-array.py) | 2026-10-16 |
 
 ## 题解笔记
 
@@ -80,6 +83,7 @@ leetcode-/
 └── solutions/                 # 所有题解代码
     ├── 0001-two-sum.py
     ├── 0002-add-two-numbers.py
+    ├── 0003-longest-substring-without-repeating-characters.py
     ├── 0016-3sum-closest.py
     ├── 0020-valid-parentheses.py
     ├── 0026-remove-duplicates-from-sorted-array.py
@@ -88,9 +92,11 @@ leetcode-/
     ├── 0048-rotate-image.py
     ├── 0088-merge-sorted-array.py
     ├── 0234-palindrome-linked-list.py
+    ├── 0349-intersection-of-two-arrays.py
     ├── 0622-design-circular-queue.py
     ├── 0686-repeated-string-match.py
-    └── 0912-sort-array.py
+    ├── 0912-sort-array.py
+    └── 1122-relative-sort-array.py
 ```
 
 ## 文件命名规范
