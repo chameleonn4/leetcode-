@@ -5,7 +5,7 @@
 记录我的 LeetCode 刷题过程。每道题的代码放在 `solutions/` 目录下，题号与文件一一对应，并按题目记录在下面的索引表里。
 
 - **仓库地址**：<https://github.com/chameleonn4/leetcode->
-- **已刷题目**：16 题（简单 9、中等 7，持续更新中）
+- **已刷题目**：21 题（简单 13、中等 8，持续更新中）
 - **使用语言**：Python3
 
 ## 题目索引
@@ -20,10 +20,15 @@
 | 26 | [删除有序数组中的重复项](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/) | 简单 | Python3 | 快慢指针 | [0026-remove-duplicates-from-sorted-array.py](solutions/0026-remove-duplicates-from-sorted-array.py) | 2026-10-08 |
 | 27 | [移除元素](https://leetcode.cn/problems/remove-element/) | 简单 | Python3 | 快慢指针 | [0027-remove-element.py](solutions/0027-remove-element.py) | 2026-10-08 |
 | 28 | [找出字符串中第一个匹配项的下标](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/) | 简单 | Python3 | 朴素匹配（双指针） | [0028-find-the-index-of-the-first-occurrence-in-a-string.py](solutions/0028-find-the-index-of-the-first-occurrence-in-a-string.py) | 2026-10-10 |
+| 36 | [有效的数独](https://leetcode.cn/problems/valid-sudoku/) | 中等 | Python3 | 一遍遍历 + 行/列/宫三个哈希表 | [0036-valid-sudoku.py](solutions/0036-valid-sudoku.py) | 2026-10-20 |
 | 48 | [旋转图像](https://leetcode.cn/problems/rotate-image/) | 中等 | Python3 | 转置 + 翻转每行 | [0048-rotate-image.py](solutions/0048-rotate-image.py) | 2026-10-10 |
 | 88 | [合并两个有序数组](https://leetcode.cn/problems/merge-sorted-array/) | 简单 | Python3 | 双指针 + 临时数组 | [0088-merge-sorted-array.py](solutions/0088-merge-sorted-array.py) | 2026-10-12 |
+| 104 | [二叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/) | 简单 | Python3 | 递归 DFS（左右取较大 +1） | [0104-maximum-depth-of-binary-tree.py](solutions/0104-maximum-depth-of-binary-tree.py) | 2026-10-20 |
+| 219 | [存在重复元素 II](https://leetcode.cn/problems/contains-duplicate-ii/) | 简单 | Python3 | 哈希表维护长度 k 的滑动窗口 | [0219-contains-duplicate-ii.py](solutions/0219-contains-duplicate-ii.py) | 2026-10-20 |
 | 234 | [回文链表](https://leetcode.cn/problems/palindrome-linked-list/) | 简单 | Python3 | 转数组后首尾比较 | [0234-palindrome-linked-list.py](solutions/0234-palindrome-linked-list.py) | 2026-10-12 |
 | 349 | [两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/) | 简单 | Python3 | 排序 + 双指针（利用有序天然去重） | [0349-intersection-of-two-arrays.py](solutions/0349-intersection-of-two-arrays.py) | 2026-10-16 |
+| 455 | [分发饼干](https://leetcode.cn/problems/assign-cookies/) | 简单 | Python3 | 贪心 + 双指针（小饼干喂小胃口） | [0455-assign-cookies.py](solutions/0455-assign-cookies.py) | 2026-10-20 |
+| 509 | [斐波那契数](https://leetcode.cn/problems/fibonacci-number/) | 简单 | Python3 | 按定义递归（进阶可改迭代） | [0509-fibonacci-number.py](solutions/0509-fibonacci-number.py) | 2026-10-20 |
 | 622 | [设计循环队列](https://leetcode.cn/problems/design-circular-queue/) | 中等 | Python3 | 多开一格 + 取模区分空/满 | [0622-design-circular-queue.py](solutions/0622-design-circular-queue.py) | 2026-10-12 |
 | 686 | [重复叠加字符串匹配](https://leetcode.cn/problems/repeated-string-match/) | 中等 | Python3 | KMP 跑在 a 的无限重复串上（[图解](notes/0686-KMP回退原理图解.png)、[笔记](#686-重复叠加字符串匹配--kmp-在无限重复串上匹配)） | [0686-repeated-string-match.py](solutions/0686-repeated-string-match.py) | 2026-10-12 |
 | 912 | [排序数组](https://leetcode.cn/problems/sort-array/) | 中等 | Python3 | 随机基准 + 三路快排（[图解](notes/0912-三路快排分区图解.png)、[笔记](#912-排序数组--三路快排的分区过程)） | [0912-sort-array.py](solutions/0912-sort-array.py) | 2026-10-10 |
@@ -89,10 +94,15 @@ leetcode-/
     ├── 0026-remove-duplicates-from-sorted-array.py
     ├── 0027-remove-element.py
     ├── 0028-find-the-index-of-the-first-occurrence-in-a-string.py
+    ├── 0036-valid-sudoku.py
     ├── 0048-rotate-image.py
     ├── 0088-merge-sorted-array.py
+    ├── 0104-maximum-depth-of-binary-tree.py
+    ├── 0219-contains-duplicate-ii.py
     ├── 0234-palindrome-linked-list.py
     ├── 0349-intersection-of-two-arrays.py
+    ├── 0455-assign-cookies.py
+    ├── 0509-fibonacci-number.py
     ├── 0622-design-circular-queue.py
     ├── 0686-repeated-string-match.py
     ├── 0912-sort-array.py
