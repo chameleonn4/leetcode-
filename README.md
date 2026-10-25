@@ -5,7 +5,7 @@
 记录我的 LeetCode 刷题过程。每道题的代码放在 `solutions/` 目录下，题号与文件一一对应，并按题目记录在下面的索引表里。
 
 - **仓库地址**：<https://github.com/chameleonn4/leetcode->
-- **已刷题目**：25 题（简单 14、中等 11，持续更新中）
+- **已刷题目**：27 题（简单 14、中等 13，持续更新中）
 - **使用语言**：Python3
 
 ## 题目索引
@@ -27,6 +27,7 @@
 | 88 | [合并两个有序数组](https://leetcode.cn/problems/merge-sorted-array/) | 简单 | Python3 | 双指针 + 临时数组 | [0088-merge-sorted-array.py](solutions/0088-merge-sorted-array.py) | 2026-10-12 |
 | 94 | [二叉树的中序遍历](https://leetcode.cn/problems/binary-tree-inorder-traversal/) | 简单 | Python3 | 递归 DFS（左 → 根 → 右） | [0094-binary-tree-inorder-traversal.py](solutions/0094-binary-tree-inorder-traversal.py) | 2026-10-25 |
 | 104 | [二叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/) | 简单 | Python3 | 递归 DFS（左右取较大 +1） | [0104-maximum-depth-of-binary-tree.py](solutions/0104-maximum-depth-of-binary-tree.py) | 2026-10-20 |
+| 155 | [最小栈](https://leetcode.cn/problems/min-stack/) | 中等 | Python3 | 辅助栈（同步记录当前最小值） | [0155-min-stack.py](solutions/0155-min-stack.py) | 2026-10-25 |
 | 189 | [轮转数组](https://leetcode.cn/problems/rotate-array/) | 中等 | Python3 | 三次反转（整体 + 前 k + 后 n-k） | [0189-rotate-array.py](solutions/0189-rotate-array.py) | 2026-10-25 |
 | 219 | [存在重复元素 II](https://leetcode.cn/problems/contains-duplicate-ii/) | 简单 | Python3 | 哈希表维护长度 k 的滑动窗口 | [0219-contains-duplicate-ii.py](solutions/0219-contains-duplicate-ii.py) | 2026-10-20 |
 | 234 | [回文链表](https://leetcode.cn/problems/palindrome-linked-list/) | 简单 | Python3 | 转数组后首尾比较 | [0234-palindrome-linked-list.py](solutions/0234-palindrome-linked-list.py) | 2026-10-12 |
@@ -35,6 +36,7 @@
 | 509 | [斐波那契数](https://leetcode.cn/problems/fibonacci-number/) | 简单 | Python3 | 按定义递归（进阶可改迭代） | [0509-fibonacci-number.py](solutions/0509-fibonacci-number.py) | 2026-10-20 |
 | 622 | [设计循环队列](https://leetcode.cn/problems/design-circular-queue/) | 中等 | Python3 | 多开一格 + 取模区分空/满 | [0622-design-circular-queue.py](solutions/0622-design-circular-queue.py) | 2026-10-12 |
 | 686 | [重复叠加字符串匹配](https://leetcode.cn/problems/repeated-string-match/) | 中等 | Python3 | KMP 跑在 a 的无限重复串上（[图解](notes/0686-KMP回退原理图解.png)、[笔记](#686-重复叠加字符串匹配--kmp-在无限重复串上匹配)） | [0686-repeated-string-match.py](solutions/0686-repeated-string-match.py) | 2026-10-12 |
+| 739 | [每日温度](https://leetcode.cn/problems/daily-temperatures/) | 中等 | Python3 | 单调递减栈（存还没等到更高温度的下标） | [0739-daily-temperatures.py](solutions/0739-daily-temperatures.py) | 2026-10-25 |
 | 912 | [排序数组](https://leetcode.cn/problems/sort-array/) | 中等 | Python3 | 随机基准 + 三路快排（[图解](notes/0912-三路快排分区图解.png)、[笔记](#912-排序数组--三路快排的分区过程)） | [0912-sort-array.py](solutions/0912-sort-array.py) | 2026-10-10 |
 | 1122 | [数组的相对排序](https://leetcode.cn/problems/relative-sort-array/) | 简单 | Python3 | 计数排序（下标即值，剩余自动升序） | [1122-relative-sort-array.py](solutions/1122-relative-sort-array.py) | 2026-10-16 |
 
@@ -106,6 +108,38 @@ KMP 在这里的角色：`i` 扫磁带（只增不减），`j` = 已经匹配上
 - **`k` 必须先对 `n` 取模**，题目里 `k` 最大到 `10^5`，不取模会越界；
 - **用左移还是右移，别搞混方向**。左移 k 位 = 右移 n-k 位，如果想用「前 k 个」这套写法算左移，就得先把 `k` 换成 `n-k`（或直接写成「反转前 n-k 个、再反转后 k 个」）。写完最好用手推样例验证一遍方向。
 
+### 739. 每日温度 —— 单调栈：把「谁还在等更高温度」记下来
+
+栈里存的是**还没等到更高温度的那些天的下标**，且它们对应的温度从栈底到栈顶单调不增。
+
+遍历到第 `i` 天时：
+
+- 只要 `temperatures[i] > temperatures[stack[-1]]`，说明栈顶那天终于等到了更高的一天，答案是 `i - stack[-1]`，弹出并写进 `res`；
+- 重复这个过程，直到栈空或者栈顶那天的温度不低于今天；
+- 把 `i` 压进栈。
+
+**为什么栈里温度能保持单调不增？** 因为栈顶那天若温度 ≥ 今天，它就还得继续等；而它入栈前更靠下的那些天温度更高，早就出栈了。每个下标最多入栈、出栈各一次，所以总时间是 O(n)，不是 O(n²)。
+
+两个细节：
+
+- 遍历结束仍在栈中的日子没等到更高温度，`res` 保持初值 `0`（题目要求用 0 代替）；
+- 比较用严格大于 `>` 而不是 `>=`——**温度相等不算「更高」**。
+
+### 155. 最小栈 —— 用辅助栈记住「历史最小值」
+
+`stack` 存原始元素，`minstack` 与它等长，第 `i` 个位置存的是「前 `i+1` 个元素推入之后的最小值」：
+
+- `push` 时压入 `min(val, minstack[-1])`；
+- `pop` 时两个栈**同步弹出**——最小值的历史就自然回退到了上一个时刻，不用额外记录；
+- `top` 取 `stack` 栈顶，`getMin` 取 `minstack` 栈顶。
+
+这就是「用空间换时间」：四个操作都是 O(1)，代价是多存一份栈。
+
+面试常追问的变体：
+
+- **单栈存元组**：只用一个栈，每个元素存 `(值, 当时的最小值)`，pop 时同时丢掉元组；
+- **辅助栈只存「破纪录」的元素**：只有新值 ≤ 当前最小值时才压进辅助栈，空间最省（严格递增序列时辅助栈大小为 1）。
+
 ## 目录结构
 
 ```
@@ -132,6 +166,7 @@ leetcode-/
     ├── 0088-merge-sorted-array.py
     ├── 0094-binary-tree-inorder-traversal.py
     ├── 0104-maximum-depth-of-binary-tree.py
+    ├── 0155-min-stack.py
     ├── 0189-rotate-array.py
     ├── 0219-contains-duplicate-ii.py
     ├── 0234-palindrome-linked-list.py
@@ -140,6 +175,7 @@ leetcode-/
     ├── 0509-fibonacci-number.py
     ├── 0622-design-circular-queue.py
     ├── 0686-repeated-string-match.py
+    ├── 0739-daily-temperatures.py
     ├── 0912-sort-array.py
     └── 1122-relative-sort-array.py
 ```
