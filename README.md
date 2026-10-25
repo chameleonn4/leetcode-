@@ -5,7 +5,7 @@
 记录我的 LeetCode 刷题过程。每道题的代码放在 `solutions/` 目录下，题号与文件一一对应，并按题目记录在下面的索引表里。
 
 - **仓库地址**：<https://github.com/chameleonn4/leetcode->
-- **已刷题目**：21 题（简单 13、中等 8，持续更新中）
+- **已刷题目**：25 题（简单 14、中等 11，持续更新中）
 - **使用语言**：Python3
 
 ## 题目索引
@@ -22,8 +22,12 @@
 | 28 | [找出字符串中第一个匹配项的下标](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/) | 简单 | Python3 | 朴素匹配（双指针） | [0028-find-the-index-of-the-first-occurrence-in-a-string.py](solutions/0028-find-the-index-of-the-first-occurrence-in-a-string.py) | 2026-10-10 |
 | 36 | [有效的数独](https://leetcode.cn/problems/valid-sudoku/) | 中等 | Python3 | 一遍遍历 + 行/列/宫三个哈希表 | [0036-valid-sudoku.py](solutions/0036-valid-sudoku.py) | 2026-10-20 |
 | 48 | [旋转图像](https://leetcode.cn/problems/rotate-image/) | 中等 | Python3 | 转置 + 翻转每行 | [0048-rotate-image.py](solutions/0048-rotate-image.py) | 2026-10-10 |
+| 53 | [最大子数组和](https://leetcode.cn/problems/maximum-subarray/) | 中等 | Python3 | Kadane 动态规划（滚动记录连续和） | [0053-maximum-subarray.py](solutions/0053-maximum-subarray.py) | 2026-10-25 |
+| 56 | [合并区间](https://leetcode.cn/problems/merge-intervals/) | 中等 | Python3 | 按左端点排序 + 一次扫描合并 | [0056-merge-intervals.py](solutions/0056-merge-intervals.py) | 2026-10-25 |
 | 88 | [合并两个有序数组](https://leetcode.cn/problems/merge-sorted-array/) | 简单 | Python3 | 双指针 + 临时数组 | [0088-merge-sorted-array.py](solutions/0088-merge-sorted-array.py) | 2026-10-12 |
+| 94 | [二叉树的中序遍历](https://leetcode.cn/problems/binary-tree-inorder-traversal/) | 简单 | Python3 | 递归 DFS（左 → 根 → 右） | [0094-binary-tree-inorder-traversal.py](solutions/0094-binary-tree-inorder-traversal.py) | 2026-10-25 |
 | 104 | [二叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/) | 简单 | Python3 | 递归 DFS（左右取较大 +1） | [0104-maximum-depth-of-binary-tree.py](solutions/0104-maximum-depth-of-binary-tree.py) | 2026-10-20 |
+| 189 | [轮转数组](https://leetcode.cn/problems/rotate-array/) | 中等 | Python3 | 三次反转（整体 + 前 k + 后 n-k） | [0189-rotate-array.py](solutions/0189-rotate-array.py) | 2026-10-25 |
 | 219 | [存在重复元素 II](https://leetcode.cn/problems/contains-duplicate-ii/) | 简单 | Python3 | 哈希表维护长度 k 的滑动窗口 | [0219-contains-duplicate-ii.py](solutions/0219-contains-duplicate-ii.py) | 2026-10-20 |
 | 234 | [回文链表](https://leetcode.cn/problems/palindrome-linked-list/) | 简单 | Python3 | 转数组后首尾比较 | [0234-palindrome-linked-list.py](solutions/0234-palindrome-linked-list.py) | 2026-10-12 |
 | 349 | [两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/) | 简单 | Python3 | 排序 + 双指针（利用有序天然去重） | [0349-intersection-of-two-arrays.py](solutions/0349-intersection-of-two-arrays.py) | 2026-10-16 |
@@ -75,6 +79,33 @@ KMP 在这里的角色：`i` 扫磁带（只增不减），`j` = 已经匹配上
 > 用 `if` 只回退一次，算出来的 `next` 数组不符合定义（例如 `"aaaba"` 会得到 `[0,1,2,1,2]`，标准是 `[0,1,2,0,1]`）。
 > 本题因为 `kmp` 失配处用的也是 `while`，偏大的 `next` 会被继续回退"纠正"过来，结果侥幸正确；但换到别的 KMP 题就会出错。代码里已修正，并在那一行加了注释提醒。
 
+### 53. 最大子数组和 —— Kadane 算法的两个细节
+
+`cur_sum` 始终表示「以当前元素结尾的最大子数组和」，`max_sum` 是一路见过的最大值。每来一个新元素只有两种选择：接在前面那段后面（`cur_sum + num`），或者自己另起一段（`num`），取大的那个——等价于「前面那段和为负就丢掉」。
+
+两个坑：
+
+- **初值不能用 0，要用 `nums[0]`**。全负数组（如 `[-3,-1,-2]`）的答案是 `-1`，若把 `max_sum` 初始化成 0 就会答成 0；
+- **不需要 DP 数组**。`cur_sum` 只依赖上一个值，所以两个变量就够，空间 O(1)。
+
+### 189. 轮转数组 —— 三次反转为什么等价于右移 k 位
+
+把数组看成两段 `A + B`，其中 `A` 长 `n-k`（前 n-k 个元素），`B` 长 `k`（后 k 个元素）。**右移 k 位 = 把 `B` 挪到 `A` 前面 = `B + A`**。三次反转正好完成这件事：
+
+| 步骤 | 操作 | 数组变成 |
+| --- | --- | --- |
+| 初始 | — | `A + B` |
+| ① | 整体反转 | `reverse(B) + reverse(A)` |
+| ② | 反转前 k 个（正好是 `reverse(B)`） | `B + reverse(A)` |
+| ③ | 反转后 n-k 个（正好是 `reverse(A)`） | `B + A` ✅ |
+
+以样例 `nums=[1,2,3,4,5,6,7], k=3`（`A=[1,2,3,4]`, `B=[5,6,7]`）手推一遍：`[1..7]` → ①`[7,6,5,4,3,2,1]` → ②`[5,6,7,4,3,2,1]` → ③`[5,6,7,1,2,3,4]`。
+
+两个提醒：
+
+- **`k` 必须先对 `n` 取模**，题目里 `k` 最大到 `10^5`，不取模会越界；
+- **用左移还是右移，别搞混方向**。左移 k 位 = 右移 n-k 位，如果想用「前 k 个」这套写法算左移，就得先把 `k` 换成 `n-k`（或直接写成「反转前 n-k 个、再反转后 k 个」）。写完最好用手推样例验证一遍方向。
+
 ## 目录结构
 
 ```
@@ -96,8 +127,12 @@ leetcode-/
     ├── 0028-find-the-index-of-the-first-occurrence-in-a-string.py
     ├── 0036-valid-sudoku.py
     ├── 0048-rotate-image.py
+    ├── 0053-maximum-subarray.py
+    ├── 0056-merge-intervals.py
     ├── 0088-merge-sorted-array.py
+    ├── 0094-binary-tree-inorder-traversal.py
     ├── 0104-maximum-depth-of-binary-tree.py
+    ├── 0189-rotate-array.py
     ├── 0219-contains-duplicate-ii.py
     ├── 0234-palindrome-linked-list.py
     ├── 0349-intersection-of-two-arrays.py
