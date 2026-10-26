@@ -5,7 +5,7 @@
 记录我的 LeetCode 刷题过程。每道题的代码放在 `solutions/` 目录下，题号与文件一一对应，并按题目记录在下面的索引表里。
 
 - **仓库地址**：<https://github.com/chameleonn4/leetcode->
-- **已刷题目**：27 题（简单 14、中等 13，持续更新中）
+- **已刷题目**：29 题（简单 15、中等 14，持续更新中）
 - **使用语言**：Python3
 
 ## 题目索引
@@ -27,11 +27,13 @@
 | 88 | [合并两个有序数组](https://leetcode.cn/problems/merge-sorted-array/) | 简单 | Python3 | 双指针 + 临时数组 | [0088-merge-sorted-array.py](solutions/0088-merge-sorted-array.py) | 2026-10-12 |
 | 94 | [二叉树的中序遍历](https://leetcode.cn/problems/binary-tree-inorder-traversal/) | 简单 | Python3 | 递归 DFS（左 → 根 → 右） | [0094-binary-tree-inorder-traversal.py](solutions/0094-binary-tree-inorder-traversal.py) | 2026-10-25 |
 | 104 | [二叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/) | 简单 | Python3 | 递归 DFS（左右取较大 +1） | [0104-maximum-depth-of-binary-tree.py](solutions/0104-maximum-depth-of-binary-tree.py) | 2026-10-20 |
+| 121 | [买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/) | 简单 | Python3 | 一次遍历维护历史最低价 | [0121-best-time-to-buy-and-sell-stock.py](solutions/0121-best-time-to-buy-and-sell-stock.py) | 2026-10-27 |
 | 155 | [最小栈](https://leetcode.cn/problems/min-stack/) | 中等 | Python3 | 辅助栈（同步记录当前最小值） | [0155-min-stack.py](solutions/0155-min-stack.py) | 2026-10-25 |
 | 189 | [轮转数组](https://leetcode.cn/problems/rotate-array/) | 中等 | Python3 | 三次反转（整体 + 前 k + 后 n-k） | [0189-rotate-array.py](solutions/0189-rotate-array.py) | 2026-10-25 |
 | 219 | [存在重复元素 II](https://leetcode.cn/problems/contains-duplicate-ii/) | 简单 | Python3 | 哈希表维护长度 k 的滑动窗口 | [0219-contains-duplicate-ii.py](solutions/0219-contains-duplicate-ii.py) | 2026-10-20 |
 | 234 | [回文链表](https://leetcode.cn/problems/palindrome-linked-list/) | 简单 | Python3 | 转数组后首尾比较 | [0234-palindrome-linked-list.py](solutions/0234-palindrome-linked-list.py) | 2026-10-12 |
 | 349 | [两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/) | 简单 | Python3 | 排序 + 双指针（利用有序天然去重） | [0349-intersection-of-two-arrays.py](solutions/0349-intersection-of-two-arrays.py) | 2026-10-16 |
+| 394 | [字符串解码](https://leetcode.cn/problems/decode-string/) | 中等 | Python3 | 双栈（外层字符串 + 重复次数） | [0394-decode-string.py](solutions/0394-decode-string.py) | 2026-10-27 |
 | 455 | [分发饼干](https://leetcode.cn/problems/assign-cookies/) | 简单 | Python3 | 贪心 + 双指针（小饼干喂小胃口） | [0455-assign-cookies.py](solutions/0455-assign-cookies.py) | 2026-10-20 |
 | 509 | [斐波那契数](https://leetcode.cn/problems/fibonacci-number/) | 简单 | Python3 | 按定义递归（进阶可改迭代） | [0509-fibonacci-number.py](solutions/0509-fibonacci-number.py) | 2026-10-20 |
 | 622 | [设计循环队列](https://leetcode.cn/problems/design-circular-queue/) | 中等 | Python3 | 多开一格 + 取模区分空/满 | [0622-design-circular-queue.py](solutions/0622-design-circular-queue.py) | 2026-10-12 |
@@ -140,6 +142,33 @@ KMP 在这里的角色：`i` 扫磁带（只增不减），`j` = 已经匹配上
 - **单栈存元组**：只用一个栈，每个元素存 `(值, 当时的最小值)`，pop 时同时丢掉元组；
 - **辅助栈只存「破纪录」的元素**：只有新值 ≤ 当前最小值时才压进辅助栈，空间最省（严格递增序列时辅助栈大小为 1）。
 
+### 394. 字符串解码 —— 双栈：把「外层已解出的串」和「重复次数」分开存
+
+`res` 表示「当前这一层括号里已经解出来的字符串」，`num` 表示正在读取的重复次数。四种字符分别处理：
+
+| 字符 | 动作 |
+| --- | --- |
+| 数字 | `num = num * 10 + int(ch)`——重复次数可能有多位，必须乘 10 累加 |
+| `[` | 把外层的 `res` 和 `num` 分别压进两个栈，然后 `res = ""`、`num = 0`，从新的一层重新拼 |
+| `]` | 弹出外层的 `res` 和次数，把本层 `res` 重复 `cur_num` 次再拼回外层：`res = cur_res + res * cur_num` |
+| 字母 | `res += ch` |
+
+关键在 `]` 那一行：**先算本层的 `res * cur_num`，再拼到外层前面**——`cur_res + res * cur_num` 的顺序不能反，反了就变成把外层重复一遍。
+
+两个栈也可以合成一个（每次同时压入 `(res, num)` 元组），本质是「保存外层状态，等内层算完再合并回去」。
+
+复杂度：时间 O(输出串长 L)（每个字符至少被拼接一次），空间 O(L + 嵌套深度)。
+
+### 121. 买卖股票的最佳时机 —— 一次遍历维护历史最低价
+
+两个变量：`minprice`（到当前为止的最低买入价）和 `maxprofit`（到当前为止的最大利润）。每个 `price` 来了：比 `minprice` 低就更新买入价；否则算 `price - minprice` 当作今天的卖出利润，比 `maxprofit` 大就更新。
+
+因为 `minprice` 只统计到**当前这一天之前**的价格，所以天然满足「先买后卖」，不会出现把后面的低价当买入价去套前面的高价。
+
+> ⚠️ 本题代码里 `minprice = 10010` 是个**魔数哨兵**，它假设 `prices[i] <= 10^4`（LeetCode 121 的约束确实是 `0 <= prices[i] <= 10^4`），所以能通过、也对拍无误（约束内 4 万组随机零错误）。
+> 但实测把价格生成到 10011~20000 时**答案 100% 错**：哨兵比所有价格都小，`minprice` 永远不会被更新，等于把 `10010` 当成了买入价。
+> 更稳的写法是 `minprice = float('inf')`，与价格范围无关（已在 ±10^5 上对拍通过）。
+
 ## 目录结构
 
 ```
@@ -166,11 +195,13 @@ leetcode-/
     ├── 0088-merge-sorted-array.py
     ├── 0094-binary-tree-inorder-traversal.py
     ├── 0104-maximum-depth-of-binary-tree.py
+    ├── 0121-best-time-to-buy-and-sell-stock.py
     ├── 0155-min-stack.py
     ├── 0189-rotate-array.py
     ├── 0219-contains-duplicate-ii.py
     ├── 0234-palindrome-linked-list.py
     ├── 0349-intersection-of-two-arrays.py
+    ├── 0394-decode-string.py
     ├── 0455-assign-cookies.py
     ├── 0509-fibonacci-number.py
     ├── 0622-design-circular-queue.py
