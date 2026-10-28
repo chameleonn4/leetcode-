@@ -5,7 +5,7 @@
 记录我的 LeetCode 刷题过程。每道题的代码放在 `solutions/` 目录下，题号与文件一一对应，并按题目记录在下面的索引表里。
 
 - **仓库地址**：<https://github.com/chameleonn4/leetcode->
-- **已刷题目**：29 题（简单 15、中等 14，持续更新中）
+- **已刷题目**：35 题（简单 17、中等 18，持续更新中）
 - **使用语言**：Python3
 
 ## 题目索引
@@ -21,14 +21,19 @@
 | 27 | [移除元素](https://leetcode.cn/problems/remove-element/) | 简单 | Python3 | 快慢指针 | [0027-remove-element.py](solutions/0027-remove-element.py) | 2026-10-08 |
 | 28 | [找出字符串中第一个匹配项的下标](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/) | 简单 | Python3 | 朴素匹配（双指针） | [0028-find-the-index-of-the-first-occurrence-in-a-string.py](solutions/0028-find-the-index-of-the-first-occurrence-in-a-string.py) | 2026-10-10 |
 | 36 | [有效的数独](https://leetcode.cn/problems/valid-sudoku/) | 中等 | Python3 | 一遍遍历 + 行/列/宫三个哈希表 | [0036-valid-sudoku.py](solutions/0036-valid-sudoku.py) | 2026-10-20 |
+| 45 | [跳跃游戏 II](https://leetcode.cn/problems/jump-game-ii/) | 中等 | Python3 | 贪心 + BFS 分层（end / max_pos） | [0045-jump-game-ii.py](solutions/0045-jump-game-ii.py) | 2026-10-28 |
 | 48 | [旋转图像](https://leetcode.cn/problems/rotate-image/) | 中等 | Python3 | 转置 + 翻转每行 | [0048-rotate-image.py](solutions/0048-rotate-image.py) | 2026-10-10 |
 | 53 | [最大子数组和](https://leetcode.cn/problems/maximum-subarray/) | 中等 | Python3 | Kadane 动态规划（滚动记录连续和） | [0053-maximum-subarray.py](solutions/0053-maximum-subarray.py) | 2026-10-25 |
+| 55 | [跳跃游戏](https://leetcode.cn/problems/jump-game/) | 中等 | Python3 | 贪心（维护能到达的最远位置 far） | [0055-jump-game.py](solutions/0055-jump-game.py) | 2026-10-28 |
 | 56 | [合并区间](https://leetcode.cn/problems/merge-intervals/) | 中等 | Python3 | 按左端点排序 + 一次扫描合并 | [0056-merge-intervals.py](solutions/0056-merge-intervals.py) | 2026-10-25 |
+| 75 | [颜色分类](https://leetcode.cn/problems/sort-colors/) | 中等 | Python3 | 荷兰国旗三指针（left / right / index） | [0075-sort-colors.py](solutions/0075-sort-colors.py) | 2026-10-28 |
 | 88 | [合并两个有序数组](https://leetcode.cn/problems/merge-sorted-array/) | 简单 | Python3 | 双指针 + 临时数组 | [0088-merge-sorted-array.py](solutions/0088-merge-sorted-array.py) | 2026-10-12 |
 | 94 | [二叉树的中序遍历](https://leetcode.cn/problems/binary-tree-inorder-traversal/) | 简单 | Python3 | 递归 DFS（左 → 根 → 右） | [0094-binary-tree-inorder-traversal.py](solutions/0094-binary-tree-inorder-traversal.py) | 2026-10-25 |
 | 104 | [二叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/) | 简单 | Python3 | 递归 DFS（左右取较大 +1） | [0104-maximum-depth-of-binary-tree.py](solutions/0104-maximum-depth-of-binary-tree.py) | 2026-10-20 |
 | 121 | [买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/) | 简单 | Python3 | 一次遍历维护历史最低价 | [0121-best-time-to-buy-and-sell-stock.py](solutions/0121-best-time-to-buy-and-sell-stock.py) | 2026-10-27 |
+| 136 | [只出现一次的数字](https://leetcode.cn/problems/single-number/) | 简单 | Python3 | 异或（成对的数互相抵消） | [0136-single-number.py](solutions/0136-single-number.py) | 2026-10-28 |
 | 155 | [最小栈](https://leetcode.cn/problems/min-stack/) | 中等 | Python3 | 辅助栈（同步记录当前最小值） | [0155-min-stack.py](solutions/0155-min-stack.py) | 2026-10-25 |
+| 169 | [多数元素](https://leetcode.cn/problems/majority-element/) | 简单 | Python3 | 哈希表计数（过半立即返回） | [0169-majority-element.py](solutions/0169-majority-element.py) | 2026-10-28 |
 | 189 | [轮转数组](https://leetcode.cn/problems/rotate-array/) | 中等 | Python3 | 三次反转（整体 + 前 k + 后 n-k） | [0189-rotate-array.py](solutions/0189-rotate-array.py) | 2026-10-25 |
 | 219 | [存在重复元素 II](https://leetcode.cn/problems/contains-duplicate-ii/) | 简单 | Python3 | 哈希表维护长度 k 的滑动窗口 | [0219-contains-duplicate-ii.py](solutions/0219-contains-duplicate-ii.py) | 2026-10-20 |
 | 234 | [回文链表](https://leetcode.cn/problems/palindrome-linked-list/) | 简单 | Python3 | 转数组后首尾比较 | [0234-palindrome-linked-list.py](solutions/0234-palindrome-linked-list.py) | 2026-10-12 |
@@ -39,6 +44,7 @@
 | 622 | [设计循环队列](https://leetcode.cn/problems/design-circular-queue/) | 中等 | Python3 | 多开一格 + 取模区分空/满 | [0622-design-circular-queue.py](solutions/0622-design-circular-queue.py) | 2026-10-12 |
 | 686 | [重复叠加字符串匹配](https://leetcode.cn/problems/repeated-string-match/) | 中等 | Python3 | KMP 跑在 a 的无限重复串上（[图解](notes/0686-KMP回退原理图解.png)、[笔记](#686-重复叠加字符串匹配--kmp-在无限重复串上匹配)） | [0686-repeated-string-match.py](solutions/0686-repeated-string-match.py) | 2026-10-12 |
 | 739 | [每日温度](https://leetcode.cn/problems/daily-temperatures/) | 中等 | Python3 | 单调递减栈（存还没等到更高温度的下标） | [0739-daily-temperatures.py](solutions/0739-daily-temperatures.py) | 2026-10-25 |
+| 763 | [划分字母区间](https://leetcode.cn/problems/partition-labels/) | 中等 | Python3 | 贪心（记录每个字母最后出现的位置） | [0763-partition-labels.py](solutions/0763-partition-labels.py) | 2026-10-28 |
 | 912 | [排序数组](https://leetcode.cn/problems/sort-array/) | 中等 | Python3 | 随机基准 + 三路快排（[图解](notes/0912-三路快排分区图解.png)、[笔记](#912-排序数组--三路快排的分区过程)） | [0912-sort-array.py](solutions/0912-sort-array.py) | 2026-10-10 |
 | 1122 | [数组的相对排序](https://leetcode.cn/problems/relative-sort-array/) | 简单 | Python3 | 计数排序（下标即值，剩余自动升序） | [1122-relative-sort-array.py](solutions/1122-relative-sort-array.py) | 2026-10-16 |
 
@@ -189,14 +195,19 @@ leetcode-/
     ├── 0027-remove-element.py
     ├── 0028-find-the-index-of-the-first-occurrence-in-a-string.py
     ├── 0036-valid-sudoku.py
+    ├── 0045-jump-game-ii.py
     ├── 0048-rotate-image.py
     ├── 0053-maximum-subarray.py
+    ├── 0055-jump-game.py
     ├── 0056-merge-intervals.py
+    ├── 0075-sort-colors.py
     ├── 0088-merge-sorted-array.py
     ├── 0094-binary-tree-inorder-traversal.py
     ├── 0104-maximum-depth-of-binary-tree.py
     ├── 0121-best-time-to-buy-and-sell-stock.py
+    ├── 0136-single-number.py
     ├── 0155-min-stack.py
+    ├── 0169-majority-element.py
     ├── 0189-rotate-array.py
     ├── 0219-contains-duplicate-ii.py
     ├── 0234-palindrome-linked-list.py
@@ -207,6 +218,7 @@ leetcode-/
     ├── 0622-design-circular-queue.py
     ├── 0686-repeated-string-match.py
     ├── 0739-daily-temperatures.py
+    ├── 0763-partition-labels.py
     ├── 0912-sort-array.py
     └── 1122-relative-sort-array.py
 ```
