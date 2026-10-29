@@ -5,7 +5,7 @@
 记录我的 LeetCode 刷题过程。每道题的代码放在 `solutions/` 目录下，题号与文件一一对应，并按题目记录在下面的索引表里。
 
 - **仓库地址**：<https://github.com/chameleonn4/leetcode->
-- **已刷题目**：35 题（简单 17、中等 18，持续更新中）
+- **已刷题目**：40 题（简单 21、中等 19，持续更新中）
 - **使用语言**：Python3
 
 ## 题目索引
@@ -17,6 +17,7 @@
 | 3 | [无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/) | 中等 | Python3 | 滑动窗口 + 哈希表 | [0003-longest-substring-without-repeating-characters.py](solutions/0003-longest-substring-without-repeating-characters.py) | 2026-10-16 |
 | 16 | [最接近的三数之和](https://leetcode.cn/problems/3sum-closest/) | 中等 | Python3 | 排序 + 双指针 | [0016-3sum-closest.py](solutions/0016-3sum-closest.py) | 2026-10-08 |
 | 20 | [有效的括号](https://leetcode.cn/problems/valid-parentheses/) | 简单 | Python3 | 栈 | [0020-valid-parentheses.py](solutions/0020-valid-parentheses.py) | 2026-10-12 |
+| 21 | [合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists/) | 简单 | Python3 | 哑结点 + 尾指针逐个比较 | [0021-merge-two-sorted-lists.py](solutions/0021-merge-two-sorted-lists.py) | 2026-10-29 |
 | 26 | [删除有序数组中的重复项](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/) | 简单 | Python3 | 快慢指针 | [0026-remove-duplicates-from-sorted-array.py](solutions/0026-remove-duplicates-from-sorted-array.py) | 2026-10-08 |
 | 27 | [移除元素](https://leetcode.cn/problems/remove-element/) | 简单 | Python3 | 快慢指针 | [0027-remove-element.py](solutions/0027-remove-element.py) | 2026-10-08 |
 | 28 | [找出字符串中第一个匹配项的下标](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/) | 简单 | Python3 | 朴素匹配（双指针） | [0028-find-the-index-of-the-first-occurrence-in-a-string.py](solutions/0028-find-the-index-of-the-first-occurrence-in-a-string.py) | 2026-10-10 |
@@ -26,17 +27,21 @@
 | 53 | [最大子数组和](https://leetcode.cn/problems/maximum-subarray/) | 中等 | Python3 | Kadane 动态规划（滚动记录连续和） | [0053-maximum-subarray.py](solutions/0053-maximum-subarray.py) | 2026-10-25 |
 | 55 | [跳跃游戏](https://leetcode.cn/problems/jump-game/) | 中等 | Python3 | 贪心（维护能到达的最远位置 far） | [0055-jump-game.py](solutions/0055-jump-game.py) | 2026-10-28 |
 | 56 | [合并区间](https://leetcode.cn/problems/merge-intervals/) | 中等 | Python3 | 按左端点排序 + 一次扫描合并 | [0056-merge-intervals.py](solutions/0056-merge-intervals.py) | 2026-10-25 |
+| 70 | [爬楼梯](https://leetcode.cn/problems/climbing-stairs/) | 简单 | Python3 | 动态规划（dp[i] = dp[i-1] + dp[i-2]） | [0070-climbing-stairs.py](solutions/0070-climbing-stairs.py) | 2026-10-29 |
 | 75 | [颜色分类](https://leetcode.cn/problems/sort-colors/) | 中等 | Python3 | 荷兰国旗三指针（left / right / index） | [0075-sort-colors.py](solutions/0075-sort-colors.py) | 2026-10-28 |
 | 88 | [合并两个有序数组](https://leetcode.cn/problems/merge-sorted-array/) | 简单 | Python3 | 双指针 + 临时数组 | [0088-merge-sorted-array.py](solutions/0088-merge-sorted-array.py) | 2026-10-12 |
 | 94 | [二叉树的中序遍历](https://leetcode.cn/problems/binary-tree-inorder-traversal/) | 简单 | Python3 | 递归 DFS（左 → 根 → 右） | [0094-binary-tree-inorder-traversal.py](solutions/0094-binary-tree-inorder-traversal.py) | 2026-10-25 |
 | 104 | [二叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/) | 简单 | Python3 | 递归 DFS（左右取较大 +1） | [0104-maximum-depth-of-binary-tree.py](solutions/0104-maximum-depth-of-binary-tree.py) | 2026-10-20 |
+| 118 | [杨辉三角](https://leetcode.cn/problems/pascals-triangle/) | 简单 | Python3 | 二维 DP（首尾置 1，中间是左上+右上） | [0118-pascals-triangle.py](solutions/0118-pascals-triangle.py) | 2026-10-29 |
 | 121 | [买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/) | 简单 | Python3 | 一次遍历维护历史最低价 | [0121-best-time-to-buy-and-sell-stock.py](solutions/0121-best-time-to-buy-and-sell-stock.py) | 2026-10-27 |
 | 136 | [只出现一次的数字](https://leetcode.cn/problems/single-number/) | 简单 | Python3 | 异或（成对的数互相抵消） | [0136-single-number.py](solutions/0136-single-number.py) | 2026-10-28 |
+| 141 | [环形链表](https://leetcode.cn/problems/linked-list-cycle/) | 简单 | Python3 | 哈希表记录访问过的结点 | [0141-linked-list-cycle.py](solutions/0141-linked-list-cycle.py) | 2026-10-29 |
 | 155 | [最小栈](https://leetcode.cn/problems/min-stack/) | 中等 | Python3 | 辅助栈（同步记录当前最小值） | [0155-min-stack.py](solutions/0155-min-stack.py) | 2026-10-25 |
 | 169 | [多数元素](https://leetcode.cn/problems/majority-element/) | 简单 | Python3 | 哈希表计数（过半立即返回） | [0169-majority-element.py](solutions/0169-majority-element.py) | 2026-10-28 |
 | 189 | [轮转数组](https://leetcode.cn/problems/rotate-array/) | 中等 | Python3 | 三次反转（整体 + 前 k + 后 n-k） | [0189-rotate-array.py](solutions/0189-rotate-array.py) | 2026-10-25 |
 | 219 | [存在重复元素 II](https://leetcode.cn/problems/contains-duplicate-ii/) | 简单 | Python3 | 哈希表维护长度 k 的滑动窗口 | [0219-contains-duplicate-ii.py](solutions/0219-contains-duplicate-ii.py) | 2026-10-20 |
 | 234 | [回文链表](https://leetcode.cn/problems/palindrome-linked-list/) | 简单 | Python3 | 转数组后首尾比较 | [0234-palindrome-linked-list.py](solutions/0234-palindrome-linked-list.py) | 2026-10-12 |
+| 238 | [除了自身以外数组的乘积](https://leetcode.cn/problems/product-of-array-except-self/) | 中等 | Python3 | 前缀积 × 后缀积（禁用除法） | [0238-product-of-array-except-self.py](solutions/0238-product-of-array-except-self.py) | 2026-10-29 |
 | 349 | [两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/) | 简单 | Python3 | 排序 + 双指针（利用有序天然去重） | [0349-intersection-of-two-arrays.py](solutions/0349-intersection-of-two-arrays.py) | 2026-10-16 |
 | 394 | [字符串解码](https://leetcode.cn/problems/decode-string/) | 中等 | Python3 | 双栈（外层字符串 + 重复次数） | [0394-decode-string.py](solutions/0394-decode-string.py) | 2026-10-27 |
 | 455 | [分发饼干](https://leetcode.cn/problems/assign-cookies/) | 简单 | Python3 | 贪心 + 双指针（小饼干喂小胃口） | [0455-assign-cookies.py](solutions/0455-assign-cookies.py) | 2026-10-20 |
@@ -191,6 +196,7 @@ leetcode-/
     ├── 0003-longest-substring-without-repeating-characters.py
     ├── 0016-3sum-closest.py
     ├── 0020-valid-parentheses.py
+    ├── 0021-merge-two-sorted-lists.py
     ├── 0026-remove-duplicates-from-sorted-array.py
     ├── 0027-remove-element.py
     ├── 0028-find-the-index-of-the-first-occurrence-in-a-string.py
@@ -200,17 +206,21 @@ leetcode-/
     ├── 0053-maximum-subarray.py
     ├── 0055-jump-game.py
     ├── 0056-merge-intervals.py
+    ├── 0070-climbing-stairs.py
     ├── 0075-sort-colors.py
     ├── 0088-merge-sorted-array.py
     ├── 0094-binary-tree-inorder-traversal.py
     ├── 0104-maximum-depth-of-binary-tree.py
+    ├── 0118-pascals-triangle.py
     ├── 0121-best-time-to-buy-and-sell-stock.py
     ├── 0136-single-number.py
+    ├── 0141-linked-list-cycle.py
     ├── 0155-min-stack.py
     ├── 0169-majority-element.py
     ├── 0189-rotate-array.py
     ├── 0219-contains-duplicate-ii.py
     ├── 0234-palindrome-linked-list.py
+    ├── 0238-product-of-array-except-self.py
     ├── 0349-intersection-of-two-arrays.py
     ├── 0394-decode-string.py
     ├── 0455-assign-cookies.py
